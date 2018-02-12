@@ -3,6 +3,7 @@ const app = express()
 const fs = require("fs")
 var url = require('url');
 let data = require("./data.json")
+let users = require("./users.json")
 
 append_data = (name)=>{
     data.history.push({name:name, unit:"beer"})
@@ -20,13 +21,19 @@ update_data = (username)=>{
 
 
 app.get("/", (req,res)=>res.sendFile(__dirname + "/index.html"))
-app.get('/search', function (req, res) {
-  //res.json(data);
+app.get("/bootstrap", (req,res)=>res.sendFile(__dirname + "/css/bootstrap.css"))
+app.get("/jespers_react.js", (req,res)=>res.sendFile(__dirname + "/util.js")) 
+app.get('/search', function (req, res) { //res.json(data);
   res.sendFile(__dirname + "/list_index.html")
 })
 
 app.get('/get_data', function (req, res) {
   res.json(data);
+})
+
+
+app.get('/get_users', function (req, res) {
+  res.json(users);
 })
 app.get('/update_list', function (req, res) {
     username = req.query.username 

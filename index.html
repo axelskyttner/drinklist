@@ -13,7 +13,7 @@
   <body>
 <div class="row">
 <div class="col"></div>
-<h2>Hello Sträcklista</h2>
+<h2>Hello strecklista</h2>
 <div class="col"></div>
 </div>
 
@@ -38,13 +38,16 @@
 <div class-"row">
 <div class="col"> </div>
 <div class="col">
-<ul class="list-group" style="width:100%">
+<ul class="list-group"  style="width:100%">
 <li class="list-group-item">
-
+<input type="radio" value="Lina" name="username">
 Lina
 
 </li>
-<li class="list-group-item">Axel</li>
+<li class="list-group-item">
+<input type="radio" value="Axel" name="username">
+Axel
+</li>
 </div>
 <div class="col"></div>
 </ul>
@@ -55,5 +58,22 @@ Lina
 <div class="col"></div>
 </div>
 
+<h4 >All Users</h4>
+<ul class="list-group" id="thelist">
+
+</ul>
+<script src="jespers_react.js"></script>
+<script>
+var frontEndCallback =(users_json)=>{
+    var users = JSON.parse(users_json).users
+    var list = document.getElementById("thelist")
+    var user_elements = users.map(obj=>obj.name).map(create_ul)
+    user_elements.forEach(li=>list.appendChild(li))
+    console.log(users)
+
+}
+
+httpGetAsync("http://localhost:3000/get_users", frontEndCallback)
+</script>
   </body>
 </html>

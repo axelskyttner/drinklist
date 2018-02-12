@@ -9,7 +9,6 @@ append_data = (name)=>{
 }
 
 update_data = (username)=>{
-
     fileName = "data.json"
     append_data(username)
     fs.writeFile(fileName, JSON.stringify(data), function (err) {
@@ -22,14 +21,18 @@ update_data = (username)=>{
 
 app.get("/", (req,res)=>res.sendFile(__dirname + "/index.html"))
 app.get('/search', function (req, res) {
-  res.json(data);
+  //res.json(data);
+  res.sendFile(__dirname + "/list_index.html")
 })
 
+app.get('/get_data', function (req, res) {
+  res.json(data);
+})
 app.get('/update_list', function (req, res) {
     username = req.query.username 
      
     update_data(username)
-    res.sendfile(__dirname + "/index.html")
+    res.sendFile(__dirname + "/index.html")
 })
 
 

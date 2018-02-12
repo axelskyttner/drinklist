@@ -1,31 +1,59 @@
-<html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-<head>
+    <title>Hello, world!</title>
+  </head>
+  <body>
+<div class="row">
+<div class="col"></div>
+<h2>Hello Sträcklista</h2>
+<div class="col"></div>
+</div>
 
+<form action="update_list">
+<div class = "row">
+<div class="col"></div>
+<div class="col btn-group btn-group-toggle" data-toggle="buttons">
+  <label class="btn btn-secondary active" style="margin:auto">
+    <input type="radio" name="beverage" id="option1" autocomplete="off" checked> Beer
+  </label>
+  <label class="btn btn-secondary"  style="margin:auto">
+    <input type="radio" name="beverage" id="option2" autocomplete="off"> Cider
+  </label>
+  <label class="btn btn-secondary"  style="margin:auto">
+    <input type="radio" name="beverage" id="option3" autocomplete="off"> Snaps
+  </label>
+</div>
 
-</head>
+<div class="col"></div>
+</div>
 
+<div class-"row">
+<div class="col"> </div>
+<div class="col">
+<ul class="list-group" style="width:100%">
+<li class="list-group-item">
 
+Lina
 
-<body>
+</li>
+<li class="list-group-item">Axel</li>
+</div>
+<div class="col"></div>
+</ul>
+</div>
+<div class="row">
+<div class="col"></div>
+  <input class="col-sm-3 btn btn-primary" type="submit" value="Submit">
+<div class="col"></div>
+</div>
 
-
-</body>
- <form action="/update_list" method="get">
-  First name:<br>
-  <input name="username" type="text" value=""><br>
-  Last name:<br>
-  <input type="submit" value="Submit">
-</form> 
-
-<H1>
-   Enhetslistan<br> 
-</H1>
-<h3>
-   Jesper: 1<br>
-   Axel: 4<br>
-   Therese: 2<br>
-
-</h3>
+  </body>
 </html>

@@ -1,6 +1,5 @@
-npm install
-node server.js
+## npm install
 
+## node create_jsons.js
 
-download bootstrap files
-node create_jsons.js
+## node server.js

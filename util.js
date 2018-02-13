@@ -9,17 +9,20 @@
         xmlHttp.open("GET", theUrl, true); // true for asynchronous 
         xmlHttp.send(null);
     }
-    function create_ul(name){
-        var ul = document.createElement("li")
-        ul.setAttribute("class", "list-group-item justify-content=between")
-        ul.innerHTML = name + ' <span class="badge badge-default badge-pill">1</span>'
-        return ul;
+    function create_ul(name, value){
+        var li = document.createElement("li")
+        li.setAttribute("class", "list-group-item justify-content=between")
+        li.innerHTML = name + 
+                       ' <span class="badge badge-default badge-pill">' + 
+                        value + 
+                        '</span>';
+        return li;
     }
-    function update_list(data){
-        list_of_names=  data.history.map(a=>a.name)
+    function update_list(list_of_names, corresponding_values){
         var list = document.getElementById("thelist")
-        list_of_names.forEach(function(name){
-            li = create_ul(name)
+        list_of_names.forEach(function(name, index){
+            value = corresponding_values[index] 
+            li = create_ul(name, value)
             list.appendChild(li)
         })
         

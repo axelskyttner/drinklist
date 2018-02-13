@@ -10,11 +10,24 @@
     <title>Hello, world!</title>
   </head>
   <body>
-<ul class="list-group" id="thelist"></ul>
     <script src="jespers_react.js"></script>
+<ul class="list-group" id="thelist"></ul>
     <script>
-    
-    const callback = compose(update_list, JSON.parse )
+     
+    const callback = (json_data)=>{
+       const transaction_history = JSON.parse(json_data).history 
+       const users = Array.from(new Set(transaction_history.map(a=>a.name)))
+       console.log("users", users)
+
+       var user_values = users.map((username)=>{
+            const transactions = transaction_history
+                .filter(data=>data.name == username)
+                
+           return transactions.length
+        })
+        update_list(users, user_values)
+    }
+
     const url ="http://localhost:3000/get_data"
     httpGetAsync(url, callback)
 

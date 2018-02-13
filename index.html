@@ -6,23 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="/jespers_react.js"></script>
+    <link rel="stylesheet" href="/bootstrap">
 
     <title>Hello, world!</title>
   </head>
   <body>
+
+
 <div class="row">
 <div class="col"></div>
 <h2>Hello strecklista</h2>
 <div class="col"></div>
 </div>
 
-<form action="update_list">
+<form action="update_list" >
 <div class = "row">
 <div class="col"></div>
 <div class="col btn-group btn-group-toggle" data-toggle="buttons">
-  <label class="btn btn-secondary active" style="margin:auto">
-    <input type="radio" name="beverage" id="option1" autocomplete="off" checked> Beer
+  <label class="btn btn-secondary" style="margin:auto">
+    <input type="radio" name="beverage" id="option1" autocomplete="off" > Beer
   </label>
   <label class="btn btn-secondary"  style="margin:auto">
     <input type="radio" name="beverage" id="option2" autocomplete="off"> Cider
@@ -57,12 +60,12 @@ Axel
   <input class="col-sm-3 btn btn-primary" type="submit" value="Submit">
 <div class="col"></div>
 </div>
+</form>
 
 <h4 >All Users</h4>
 <ul class="list-group" id="thelist">
 
 </ul>
-<script src="jespers_react.js"></script>
 <script>
 var frontEndCallback =(users_json)=>{
     var users = JSON.parse(users_json).users
@@ -70,10 +73,12 @@ var frontEndCallback =(users_json)=>{
     var user_elements = users.map(obj=>obj.name).map(create_ul)
     user_elements.forEach(li=>list.appendChild(li))
     console.log(users)
-
 }
 
-httpGetAsync("http://localhost:3000/get_users", frontEndCallback)
+
+window.onload = ()=>{
+    httpGetAsync("http://localhost:3000/get_users", frontEndCallback)
+}
 </script>
   </body>
 </html>

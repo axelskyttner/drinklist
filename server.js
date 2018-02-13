@@ -20,9 +20,27 @@ update_data = (username)=>{
 }
 
 
-app.get("/", (req,res)=>res.sendFile(__dirname + "/index.html"))
-app.get("/bootstrap", (req,res)=>res.sendFile(__dirname + "/css/bootstrap.css"))
-app.get("/jespers_react.js", (req,res)=>res.sendFile(__dirname + "/util.js")) 
+app.get("/", (req,res)=>{
+    console.log("incoming request")
+    res.sendFile(__dirname + "/index.html")
+
+})
+app.get("/bootstrap", (req,res)=>res.sendFile(__dirname + "/css/bootstrap.min.css"))
+app.get("/jespers_react.js", (req,res)=>{
+
+   console.log("request incoming to jespers_react")
+res.sendFile(__dirname + "/util.js")
+
+
+}) 
+
+app.get("/jespers_react.js", (req,res)=>{
+
+   console.log("request incoming to jespers_react")
+res.sendFile(__dirname + "/util.js")
+
+
+}) 
 app.get('/search', function (req, res) { //res.json(data);
   res.sendFile(__dirname + "/list_index.html")
 })
@@ -39,8 +57,7 @@ app.get('/update_list', function (req, res) {
     username = req.query.username 
      
     update_data(username)
-    res.sendFile(__dirname + "/index.html")
+    res.sendFile(__dirname +"/index.html")
 })
-
 
 app.listen(3000, ()=>console.log("listinening"))

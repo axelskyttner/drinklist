@@ -30,13 +30,13 @@
 <div class="col"></div>
 <div class="col btn-group btn-group-toggle" data-toggle="buttons">
   <label class="btn btn-secondary" style="margin:auto">
-    <input type="radio" name="beverage" id="option1" autocomplete="off" > Beer
+    <input type="radio" name="beverage"  autocomplete="off" > Beer
   </label>
   <label class="btn btn-secondary"  style="margin:auto">
-    <input type="radio" name="beverage" id="option2" autocomplete="off"> Cider
+    <input type="radio" name="beverage"  autocomplete="off"> Cider
   </label>
   <label class="btn btn-secondary"  style="margin:auto">
-    <input type="radio" name="beverage" id="option3" autocomplete="off"> Snaps
+    <input type="radio" name="beverage"  autocomplete="off"> Snaps
   </label>
 </div>
 
@@ -46,16 +46,7 @@
 <div class-"row">
 <div class="col"> </div>
 <div class="col">
-<ul class="list-group"  style="width:100%">
-<li class="list-group-item">
-<input type="radio" value="Lina" name="username">
-Lina
-
-</li>
-<li class="list-group-item">
-<input type="radio" value="Axel" name="username">
-Axel
-</li>
+<ul class="list-group" id="list_of_active_users" style="width:100%">
 </div>
 <div class="col"></div>
 </ul>
@@ -79,15 +70,61 @@ Axel
 var frontEndCallback =(users_json)=>{
     var users = JSON.parse(users_json).users
     var list = document.getElementById("thelist")
-    var user_elements = users.map(obj=>obj.name).map(create_ul)
+    var user_elements = users.map(create_ul)
+    user_elements.forEach((el)=>{
+        el.addEventListener("click", (e)=>{
+           set_cookie("active", el.innerHTML) 
+           location.reload()
+        })
+    })
     user_elements.forEach(li=>list.appendChild(li))
-    console.log(users)
+    
+    var activeUser1 = getCookie("active")
+    var activeUser2 = getCookie("active1")
+    //var activeUser3 = getCookie("active2")
+    //console.log("activeUser2", activeUser2)
+    var activeUsers = [activeUser1]
+            .filter(name=> name !== "")
+    activeUsers.forEach(createRadioButton)
+    console.log("users",users)
 }
 
+function createRadioButton(user){
+    var input = document.createElement("input")
+    var li = document.createElement("li")
+    var active_user_list = document.getElementById("list_of_active_users")
+    input.setAttribute("type", "radio") 
+    input.setAttribute("value", user) 
+    input.setAttribute("name", "username") 
+    li.setAttribute("class", "list-group-item") 
+    active_user_list.appendChild(li)
+    li.appendChild(input)
+    li.innerHTML += user
+}
 
-window.onload = ()=>{
+function set_cookie(name, value){
+    document.cookie = name + "=" + value;
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+//window.onload = ()=>{
     httpGetAsync("http://localhost:3000/get_users", frontEndCallback)
-}
+//}
 </script>
   </body>
 </html>

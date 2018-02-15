@@ -17,7 +17,16 @@
                         value + 
                         '</span>';
         return li;
+		
     }
+	
+	  function create_listis(name, value){
+        var li = document.createElement("li")
+        li.setAttribute("class", "list-group-item justify-content=between")
+        li.innerHTML = name;
+        return li;
+    }
+	
     function update_list(list_of_names, corresponding_values){
         var list = document.getElementById("thelist")
         list_of_names.forEach(function(name, index){

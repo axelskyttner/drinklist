@@ -69,6 +69,12 @@
 <script>
 var frontEndCallback =(users_json)=>{
     var users = JSON.parse(users_json).users
+    getAllUsers(users)
+    getActiveUsers() 
+    console.log("users",users)
+}
+
+function getAllUsers(users){
     var list = document.getElementById("thelist")
     var user_elements = users.map(create_ul)
     user_elements.forEach((el)=>{
@@ -78,15 +84,15 @@ var frontEndCallback =(users_json)=>{
         })
     })
     user_elements.forEach(li=>list.appendChild(li))
-    
+
+}
+
+function getActiveUsers(){
     var activeUser1 = getCookie("active")
-    var activeUser2 = getCookie("active1")
-    //var activeUser3 = getCookie("active2")
-    //console.log("activeUser2", activeUser2)
     var activeUsers = [activeUser1]
             .filter(name=> name !== "")
     activeUsers.forEach(createRadioButton)
-    console.log("users",users)
+
 }
 
 function createRadioButton(user){
@@ -97,7 +103,7 @@ function createRadioButton(user){
     input.setAttribute("value", user) 
     input.setAttribute("name", "username") 
     li.setAttribute("class", "list-group-item") 
-    active_user_list.appendChild(li)
+        active_user_list.appendChild(li)
     li.appendChild(input)
     li.innerHTML += user
 }
@@ -123,7 +129,7 @@ function getCookie(cname) {
 }
 
 //window.onload = ()=>{
-    httpGetAsync("http://localhost:3000/get_users", frontEndCallback)
+    httpGetAsync("http://192.168.10.18:3000/get_users", frontEndCallback)
 //}
 </script>
   </body>

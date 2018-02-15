@@ -11,12 +11,20 @@ append_data = (name)=>{
 
 update_data = (username)=>{
     fileName = "data.json"
-    append_data(username)
-    fs.writeFile(fileName, JSON.stringify(data), function (err) {
-      if (err) return console.log(err);
-      console.log(JSON.stringify(data));
-      console.log('writing to ' + fileName);
-    });
+    console.log("users", users.users) 
+    if(users.users.indexOf(username) !== -1){
+
+        append_data(username)
+        fs.writeFile(fileName, JSON.stringify(data), function (err) {
+          if (err) return console.log(err);
+          console.log(JSON.stringify(data));
+          console.log('writing to ' + fileName);
+        });
+
+    }
+    else{
+        console.log("not okey input")
+    }
 }
 
 
@@ -25,19 +33,27 @@ app.get("/", (req,res)=>{
     res.sendFile(__dirname + "/index.html")
 
 })
+
 app.get("/bootstrap", (req,res)=>res.sendFile(__dirname + "/css/bootstrap.min.css"))
 app.get("/jespers_react.js", (req,res)=>{
 
-   console.log("request incoming to jespers_react")
-res.sendFile(__dirname + "/util.js")
+    console.log("request incoming to jespers_react")
+    res.sendFile(__dirname + "/util.js")
 
 
 }) 
 
+app.get("/search/jespers_react.js", (req,res)=>{
+
+    console.log("request incoming to jespers_react")
+    res.sendFile(__dirname + "/util.js")
+
+
+}) 
 app.get("/jespers_react.js", (req,res)=>{
 
-   console.log("request incoming to jespers_react")
-res.sendFile(__dirname + "/util.js")
+    console.log("request incoming to jespers_react")
+    res.sendFile(__dirname + "/util.js")
 
 
 }) 

@@ -15,7 +15,7 @@
 
 <body style="background-image:url('http://reumatiskt.se/img/left_foot2.jpg')">
 
-<h2>Background Image</h2>
+<h2>Vilkommen</h2>
 
 </body>
 
@@ -76,7 +76,7 @@ var frontEndCallback =(users_json)=>{
 
 function getAllUsers(users){
     var list = document.getElementById("thelist")
-    var user_elements = users.map(create_ul)
+    var user_elements = users.map(create_listis)
     user_elements.forEach((el)=>{
         el.addEventListener("click", (e)=>{
            set_cookie("active", el.innerHTML) 
@@ -129,7 +129,7 @@ function getCookie(cname) {
 }
 
 //window.onload = ()=>{
-    httpGetAsync("http://molnhatt.se:3333/get_users", frontEndCallback)
+    httpGetAsync("http://molnhatt.se/get_users", frontEndCallback)
 //}
 </script>
   </body>

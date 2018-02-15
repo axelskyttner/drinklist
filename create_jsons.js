@@ -22,4 +22,3 @@ write_to_file = (data ,fileName)=>{
 }
 
 write_to_file(data, "data.json")
-write_to_file(users, "users.json")

@@ -7,11 +7,20 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="bootstrap">
 
-    <title>Hello, world!</title>
+    <title>Drinking List!</title>
   </head>
   <body>
     <script src="jespers_react.js"></script>
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+ <div class="row">
+<div class="col"></div>
+<div class="col">
+<h2> Här se!   </h2>
+</div>
+<div class="col"></div>
+</div>
 <ul class="list-group" id="thelist"></ul>
+<div id="advanced_user_data_container"></div>
     <script>
      
     const callback = (json_data)=>{
@@ -19,13 +28,41 @@
        const users = Array.from(new Set(transaction_history.map(a=>a.name)))
        console.log("users", users)
 
-       var user_values = users.map((username)=>{
+       var userData = users.map((username)=>{
             const transactions = transaction_history
                 .filter(data=>data.name == username)
-                
-           return transactions.length
+            const lastTime = transactions.slice(-1)[0].time
+            const times = transactions.map(trans=>parseTime(trans.time))
+            console.log("times",times)
+            const avarageDiff = calculateMeanDifference(times)
+            const standardDeviation = calculateStandardDeviation(times)
+        
+            console.log("avarageDiff", avarageDiff) 
+            return {units: transactions.length,
+                time:lastTime, 
+                username:username, 
+                standardDeviation:standardDeviation, 
+                avarageDiff: avarageDiff} 
         })
-        update_list(users, user_values)
+            const numberOfUnits = userData.map(userData=>userData.units)
+            const elementList = userData.map(user=>
+                createUserHtmlElement(user.username, 
+                user.units, 
+                user.time, 
+                user.avarageDiff,
+                user.standardDeviation
+))
+        var list = document.getElementById("thelist")
+            elementList.forEach(el=>list.appendChild(el))
+        
+        let advancedDataContainer = document.getElementById("advanced_user_data_container")
+        const advancedHeader = createHeaderForAdvancedUserData("Axel")   
+        var advancedUserData = createAdvancedUserData(10,43,10);
+        var gaugePlot = createGaugePlot();
+        advanced_user_data_container.appendChild(advancedHeader)
+        advanced_user_data_container.appendChild(advancedUserData)
+        advanced_user_data_container.appendChild(gaugePlot)
+        
     }
 
     const url ="http://localhost:3000/get_data"

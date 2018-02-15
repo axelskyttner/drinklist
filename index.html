@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <!-- Bootstrap CSS -->
-    <script src="http://molnhatt.se/jespers_react.js"></script>
+    <script src="http://localhost:3000/jespers_react.js"></script>
     <link rel="stylesheet" href="http://molnhatt.se/bootstrap">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -61,7 +61,7 @@ you're gonna be the one that saves me</title>
 <div class="col"></div>
 </div>
 
-<form action="update_list" >
+<form action="update_list" method="get">
 <div class = "row">
 <div class="col"></div>
 <div class="col btn-group btn-group-toggle" data-toggle="buttons">
@@ -128,7 +128,8 @@ function createUserButtons( users){
     user_elements.forEach((el)=>{
         el.addEventListener("click", (e)=>{
            set_cookie("active", el.innerHTML) 
-           location.reload()
+           location.assign("")
+           //location.reload()
         })
     })
     return user_elements;
@@ -150,28 +151,10 @@ function createRadioButton(user){
     return li;
 }
 
-function set_cookie(name, value){
-    document.cookie = name + "=" + value;
-}
-
-function getCookie(cname) {
-    var name = cname + "=";
-    var decodedCookie = decodeURIComponent(document.cookie);
-    var ca = decodedCookie.split(';');
-    for(var i = 0; i <ca.length; i++) {
-        var c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
 
 function init(){
-
+    history.pushState({},"", "http://localhost:3000")
+    //window.location.href = ""
     httpGetAsync("http://localhost:3000/get_users", frontEndCallback)
 //    httpGetAsync("http://molnhatt.se/get_users", frontEndCallback)
 

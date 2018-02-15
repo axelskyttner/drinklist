@@ -37,9 +37,9 @@
             console.log("times",times)
             const avarageDiff = calculateMeanDifference(times)
             const standardDeviation = calculateStandardDeviation(times)
-            const  beer_transactions=  transactions.filter(a=>a.beverage === "beer")
-            const  cider_transactions= transactions.filter(a=>a.beverage === "cider")
-            const  snaps_transactions= transactions.filter(a=>a.beverage === "snaps")
+            const  beer_transactions=  transactions.filter(a=>a.unit === "beer")
+            const  cider_transactions= transactions.filter(a=>a.unit === "cider")
+            const  snaps_transactions= transactions.filter(a=>a.unit === "snaps")
         
             return {
                 units: transactions.length,
@@ -65,7 +65,7 @@
         if(userData.length > 0){
             let firstUser = userData[0] 
             console.log("firstUser", firstUser)
-            advancedUserData = createAdvancedUserData(firstUser.beers + 1,firstUser.cider + 1,firstUser.snaps + 1);
+            advancedUserData = createAdvancedUserData(firstUser.beers ,firstUser.cider ,firstUser.snaps );
         }
         else{
 

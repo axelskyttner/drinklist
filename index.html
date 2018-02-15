@@ -4,10 +4,13 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    
     <!-- Bootstrap CSS -->
     <script src="/jespers_react.js"></script>
     <link rel="stylesheet" href="/bootstrap">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
     <title>Today is gonna be the day
 That they're gonna throw it back to you
@@ -63,13 +66,13 @@ you're gonna be the one that saves me</title>
 <div class="col"></div>
 <div class="col btn-group btn-group-toggle" data-toggle="buttons">
   <label class="btn btn-secondary" style="margin:auto; background-color:crimson;">
-    <input type="radio" name="beverage"  autocomplete="off" > Beer
+    <input type="radio" name="beverage"  value="beer" autocomplete="off" checked  > Beer
   </label>
   <label class="btn btn-secondary"  style="margin:auto; background-color:crimson;">
-    <input type="radio" name="beverage"  autocomplete="off"> Cider
+    <input type="radio" name="beverage" value="cider" autocomplete="off"> Cider
   </label>
   <label class="btn btn-secondary"  style="margin:auto; background-color:crimson;">
-    <input type="radio" name="beverage"  autocomplete="off" => Snaps
+    <input type="radio" name="beverage" value="snaps" autocomplete="off" => Snaps
   </label>
 </div>
 
@@ -91,10 +94,14 @@ you're gonna be the one that saves me</title>
 </div>
 </form>
 <!--
+
+<img src="http://reumatiskt.se/img/left_foot2.jpg" alt="Mountain View" style="width:440px;height:200px;">
+<img src="https://media0.giphy.com/media/6qMZkhS6h0rKw/giphy.gif" alt="Mountain View" style="width:100px;height:100px;">
+<img src="https://media.giphy.com/media/xUOwFZzQU6KZ90jSM0/giphy.gif" alt="Mountain View" style="width:400px;height:300px;">
 <img src="https://media0.giphy.com/media/nhC4BFdo98b7i/giphy.gif" alt="Mountain View" style="width:100px;height:100px;">
 <img src="http://reumatiskt.se/img/left_foot2.jpg" alt="Mountain View" style="width:440px;height:200px;">
--->
 
+-->
 
 <h4 style = "color:green">Alla medverkande</h4>
 <ul class="list-group" id="thelist">
@@ -102,14 +109,21 @@ you're gonna be the one that saves me</title>
 </ul>
 <script>
 var frontEndCallback =(users_json)=>{
-    var users = JSON.parse(users_json).users
-    getAllUsers(users)
-    getActiveUsers() 
-    console.log("users",users)
+
+    const users = JSON.parse(users_json).users
+    const list_with_all_users = document.getElementById("thelist")
+
+    const userButtons = createUserButtons( users)
+    
+    userButtons.forEach(li=>list_with_all_users.appendChild(li))
+
+    var active_user_list = document.getElementById("list_of_active_users")
+    var activeUser = getCookie("active")
+    radio_button = createRadioButton(activeUser)
+    active_user_list.appendChild(radio_button)
 }
 
-function getAllUsers(users){
-    var list = document.getElementById("thelist")
+function createUserButtons( users){
     var user_elements = users.map(create_listis)
     user_elements.forEach((el)=>{
         el.addEventListener("click", (e)=>{
@@ -117,31 +131,23 @@ function getAllUsers(users){
            location.reload()
         })
     })
-    user_elements.forEach(li=>list.appendChild(li))
+    return user_elements;
 
 }
 
-function getActiveUsers(){
-    var activeUser1 = getCookie("active")
-    var activeUsers = [activeUser1]
-            .filter(name=> name !== "")
-    activeUsers.forEach(createRadioButton)
-
-}
 
 function createRadioButton(user){
     var input = document.createElement("input")
     var li = document.createElement("li")
-    var active_user_list = document.getElementById("list_of_active_users")
     input.setAttribute("type", "radio")
 	input.setAttribute("checked", "checked")
 	input.setAttribute("style", "visibility:hidden")	 
     input.setAttribute("value", user) 
     input.setAttribute("name", "username") 
     li.setAttribute("class", "list-group-item") 
-        active_user_list.appendChild(li)
     li.appendChild(input)
     li.innerHTML += user
+    return li;
 }
 
 function set_cookie(name, value){
@@ -164,9 +170,14 @@ function getCookie(cname) {
     return "";
 }
 
-//window.onload = ()=>{
+function init(){
+
     httpGetAsync("http://molnhatt.se/get_users", frontEndCallback)
-//}
+
+}
+
+    init();
+
 </script>
   </body>
 </html>

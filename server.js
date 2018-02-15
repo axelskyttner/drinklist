@@ -11,12 +11,20 @@ append_data = (name, beverage, hour, minute)=>{
 
 update_data = (username, beverage, hour, minute)=>{
     fileName = "data.json"
-    append_data(username, beverage, hour,minute)
-    fs.writeFile(fileName, JSON.stringify(data), function (err) {
-      if (err) return console.log(err);
-      console.log(JSON.stringify(data));
-      console.log('writing to ' + fileName);
-    });
+    console.log("users", users.users) 
+    if(users.users.indexOf(username) !== -1){
+
+    	append_data(username, beverage, hour,minute)
+        fs.writeFile(fileName, JSON.stringify(data), function (err) {
+          if (err) return console.log(err);
+          console.log(JSON.stringify(data));
+          console.log('writing to ' + fileName);
+        });
+
+    }
+    else{
+        console.log("not okey input")
+    }
 }
 
 
@@ -25,6 +33,7 @@ app.get("/", (req,res)=>{
     res.sendFile(__dirname + "/index.html")
 
 })
+
 app.get("/bootstrap", (req,res)=>res.sendFile(__dirname + "/css/bootstrap.min.css"))
 app.get("/bootstrap.min.css.map", (req,res)=>res.sendFile(__dirname + "/css/bootstrap.min.css.map"))
 app.get("/jespers_react.js", (req,res)=>{
@@ -35,10 +44,17 @@ app.get("/jespers_react.js", (req,res)=>{
 
 }) 
 
+app.get("/search/jespers_react.js", (req,res)=>{
+
+    console.log("request incoming to jespers_react")
+    res.sendFile(__dirname + "/util.js")
+
+
+}) 
 app.get("/jespers_react.js", (req,res)=>{
 
-   console.log("request incoming to jespers_react")
-res.sendFile(__dirname + "/util.js")
+    console.log("request incoming to jespers_react")
+    res.sendFile(__dirname + "/util.js")
 
 
 }) 
@@ -59,8 +75,8 @@ app.get('/update_list', function (req, res) {
     beverage = req.query.beverage 
     console.log("beverage", beverage)
      
-        update_data(username, beverage,new Date().getHours(), new Date().getMinutes() )
+        update_data(username, beverage,new Date().getHours() + 1, new Date().getMinutes() )
     res.sendFile(__dirname +"/index.html")
 })
 
-app.listen(3000, ()=>console.log("listinening"))
+app.listen(3333, ()=>console.log("listinening"))

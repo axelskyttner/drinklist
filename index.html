@@ -50,7 +50,7 @@ you're gonna be the one that saves me</title>
   </head>
   <body>
 
- <body style="background-image:url('https://academian.se/img/avnsp-logo.png'); " >
+ <body style="">
 
 
 </body>
@@ -66,13 +66,13 @@ you're gonna be the one that saves me</title>
 <div class="col"></div>
 <div class="col btn-group btn-group-toggle" data-toggle="buttons">
   <label class="btn btn-secondary" style="margin:auto; background-color:crimson;">
-    <input type="radio" name="beverage"  autocomplete="off" checked  > Beer
+    <input type="radio" name="beverage"  value="beer" autocomplete="off" checked  > Beer
   </label>
   <label class="btn btn-secondary"  style="margin:auto; background-color:crimson;">
-    <input type="radio" name="beverage"  autocomplete="off"> Cider
+    <input type="radio" name="beverage" value="cider" autocomplete="off"> Cider
   </label>
   <label class="btn btn-secondary"  style="margin:auto; background-color:crimson;">
-    <input type="radio" name="beverage"  autocomplete="off" => Snaps
+    <input type="radio" name="beverage" value="snaps" autocomplete="off" => Snaps
   </label>
 </div>
 
@@ -94,6 +94,7 @@ you're gonna be the one that saves me</title>
 </div>
 </form>
 <!--
+
 <img src="http://reumatiskt.se/img/left_foot2.jpg" alt="Mountain View" style="width:440px;height:200px;">
 <img src="https://media0.giphy.com/media/6qMZkhS6h0rKw/giphy.gif" alt="Mountain View" style="width:100px;height:100px;">
 <img src="https://media.giphy.com/media/xUOwFZzQU6KZ90jSM0/giphy.gif" alt="Mountain View" style="width:400px;height:300px;">
@@ -171,7 +172,7 @@ function getCookie(cname) {
 
 function init(){
 
-    httpGetAsync("http://localhost:3000/get_users", frontEndCallback)
+    httpGetAsync("http://molnhatt.se/get_users", frontEndCallback)
 
 }
 

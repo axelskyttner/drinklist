@@ -13,9 +13,9 @@
   </head>
   <body>
 
-<body style="background-image:url('http://reumatiskt.se/img/left_foot2.jpg')">
+<body style="background-image:url('https://media.giphy.com/media/xUOwFZzQU6KZ90jSM0/giphy.gif')">
 
-<h2>Vilkommen</h2>
+<!-- <h2>Vilkommen</h2> -->
 
 </body>
 
@@ -59,7 +59,7 @@
 </form>
 
 <img src="https://media0.giphy.com/media/6qMZkhS6h0rKw/giphy.gif" alt="Mountain View" style="width:200px;height:200px;">
-<img src="https://media0.giphy.com/media/nhC4BFdo98b7i/giphy.gif" alt="Mountain View" style="width:200px;height:200px;">
+<img src="https://media0.giphy.com/media/nhC4BFdo98b7i/giphy.gif" alt="Mountain View" style="width:30px;height:30px;">
 
 
 <h4 >All Users</h4>
@@ -99,7 +99,9 @@ function createRadioButton(user){
     var input = document.createElement("input")
     var li = document.createElement("li")
     var active_user_list = document.getElementById("list_of_active_users")
-    input.setAttribute("type", "radio") 
+    input.setAttribute("type", "radio")
+	input.setAttribute("checked", "checked")
+	input.setAttribute("style", "visibility:hidden")	 
     input.setAttribute("value", user) 
     input.setAttribute("name", "username") 
     li.setAttribute("class", "list-group-item") 

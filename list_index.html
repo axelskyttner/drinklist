@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="http://molnhatt.se/bootstrap">
+    <link rel="stylesheet" href="http://localhost:3000/bootstrap">
 
     <title>Drinking List!</title>
   </head>
   <body>
-    <script src="http://molnhatt.se/jespers_react.js"></script>
+    <script src="http://localhost:3000/jespers_react.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
  <div class="row">
 <div class="col"></div>
@@ -60,21 +60,19 @@
             elementList.forEach(el=>list.appendChild(el))
         
         let advancedDataContainer = document.getElementById("advanced_user_data_container")
-        const advancedHeader = createHeaderForAdvancedUserData("Axel")   
         var advancedUserData;
-        if(userData.length > 0){
-            let firstUser = userData[0] 
-            console.log("firstUser", firstUser)
-            advancedUserData = createAdvancedUserData(firstUser.beers ,firstUser.cider ,firstUser.snaps );
+        var userName = getCookie("advancedDataTarget")
+        console.log("userName", userName)
+        console.log("userData", userData)
+        if(userName !== undefined){
+            let firstUser = userData.filter(data=>data.username === userName)[0]
+            advancedUserData = createAdvancedUserData( firstUser.beers ,firstUser.cider ,firstUser.snaps );
+            const advancedHeader = createHeaderForAdvancedUserData(firstUser.username)   
+            var gaugePlot = createGaugePlot();
+            advanced_user_data_container.appendChild(advancedHeader)
+            advanced_user_data_container.appendChild(advancedUserData)
+            advanced_user_data_container.appendChild(gaugePlot)
         }
-        else{
-
-            advancedUserData = createAdvancedUserData(1,1,1);
-        }
-        var gaugePlot = createGaugePlot();
-        advanced_user_data_container.appendChild(advancedHeader)
-        advanced_user_data_container.appendChild(advancedUserData)
-        advanced_user_data_container.appendChild(gaugePlot)
         
     }
 

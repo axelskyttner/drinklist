@@ -11,6 +11,14 @@ function httpGetAsync(theUrl, callback)
 }
 function createUserHtmlElement(userData){
     var li = document.createElement("li")
+    var button = document.createElement("button")
+    
+    a = ()=>{   
+        set_cookie("advancedDataTarget", userData.username);
+         location.reload()
+}
+
+    li.addEventListener("click", a)
         li.setAttribute("class", "list-group-item justify-content=between")
         li.innerHTML = userData.username + 
         ', enheter: ' +
@@ -19,6 +27,7 @@ function createUserHtmlElement(userData){
         '</span>' +
              ', väntevärde:' + userData.avarageDiff + ', Standardavvikelse: ' + userData.standardDeviation + ', senaste streck: '+ userData.time
         
+    //li.appendChild(button)
     return li;
 
 }

@@ -153,10 +153,10 @@ function createRadioButton(user){
 
 
 function init(){
-    history.pushState({},"", "http://localhost:3000")
+    history.pushState({},"", "http://molnhatt.se/")
     //window.location.href = ""
-    httpGetAsync("http://localhost:3000/get_users", frontEndCallback)
-//    httpGetAsync("http://molnhatt.se/get_users", frontEndCallback)
+    //httpGetAsync("http://localhost:3000/get_users", frontEndCallback)
+    httpGetAsync("http://molnhatt.se/get_users", frontEndCallback)
 
 }
 

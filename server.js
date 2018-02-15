@@ -57,6 +57,7 @@ app.get('/get_users', function (req, res) {
 app.get('/update_list', function (req, res) {
     username = req.query.username 
     beverage = req.query.beverage 
+    console.log("beverage", beverage)
      
         update_data(username, beverage,new Date().getHours(), new Date().getMinutes() )
     res.sendFile(__dirname +"/index.html")

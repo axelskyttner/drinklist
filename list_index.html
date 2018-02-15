@@ -32,32 +32,43 @@
             const transactions = transaction_history
                 .filter(data=>data.name == username)
             const lastTime = transactions.slice(-1)[0].time
+            console.log(lastTime)
             const times = transactions.map(trans=>parseTime(trans.time))
             console.log("times",times)
             const avarageDiff = calculateMeanDifference(times)
             const standardDeviation = calculateStandardDeviation(times)
+            const  beer_transactions=  transactions.filter(a=>a.beverage === "beer")
+            const  cider_transactions= transactions.filter(a=>a.beverage === "cider")
+            const  snaps_transactions= transactions.filter(a=>a.beverage === "snaps")
         
-            console.log("avarageDiff", avarageDiff) 
-            return {units: transactions.length,
+            return {
+                units: transactions.length,
+                beers: beer_transactions.length,
+                cider: cider_transactions.length,
+                snaps: snaps_transactions.length,
                 time:lastTime, 
                 username:username, 
                 standardDeviation:standardDeviation, 
                 avarageDiff: avarageDiff} 
         })
-            const numberOfUnits = userData.map(userData=>userData.units)
             const elementList = userData.map(user=>
-                createUserHtmlElement(user.username, 
-                user.units, 
-                user.time, 
-                user.avarageDiff,
-                user.standardDeviation
-))
+                createUserHtmlElement(user)
+            )
         var list = document.getElementById("thelist")
             elementList.forEach(el=>list.appendChild(el))
         
         let advancedDataContainer = document.getElementById("advanced_user_data_container")
         const advancedHeader = createHeaderForAdvancedUserData("Axel")   
-        var advancedUserData = createAdvancedUserData(10,43,10);
+        var advancedUserData;
+        if(userData.length > 0){
+            let firstUser = userData[0] 
+            console.log("firstUser", firstUser)
+            advancedUserData = createAdvancedUserData(firstUser.beers + 1,firstUser.cider + 1,firstUser.snaps + 1);
+        }
+        else{
+
+            advancedUserData = createAdvancedUserData(1,1,1);
+        }
         var gaugePlot = createGaugePlot();
         advanced_user_data_container.appendChild(advancedHeader)
         advanced_user_data_container.appendChild(advancedUserData)

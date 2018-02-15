@@ -9,15 +9,15 @@ function httpGetAsync(theUrl, callback)
     xmlHttp.open("GET", theUrl, true); // true for asynchronous 
     xmlHttp.send(null);
 }
-function createUserHtmlElement(name, value, time, avarageDiff, standardDeviation){
+function createUserHtmlElement(userData){
     var li = document.createElement("li")
         li.setAttribute("class", "list-group-item justify-content=between")
-        li.innerHTML = name + 
+        li.innerHTML = userData.username + 
         ', enheter: ' +
         ' <span class="badge badge-default badge-pill">' + 
-        value + 
+        userData.units + 
         '</span>' +
-             ', väntevärde:' + avarageDiff + ', Standardavvikelse: ' + standardDeviation + ', senaste streck: '+ time
+             ', väntevärde:' + userData.avarageDiff + ', Standardavvikelse: ' + userData.standardDeviation + ', senaste streck: '+ userData.time
         
     return li;
 

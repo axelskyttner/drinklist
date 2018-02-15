@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="http://localhost:3000/bootstrap">
+    <link rel="stylesheet" href="http://molnhatt.se/bootstrap">
 
     <title>Drinking List!</title>
   </head>
   <body>
-    <script src="http://localhost:3000/jespers_react.js"></script>
+    <script src="http://molnhatt.se/jespers_react.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
  <div class="row">
 <div class="col"></div>
@@ -19,8 +19,10 @@
 </div>
 <div class="col"></div>
 </div>
+
 <ul class="list-group" id="thelist"></ul>
-<div id="advanced_user_data_container"></div>
+
+<div  id="advanced_user_data_container"></div>
     <script>
      
     const callback = (json_data)=>{
@@ -62,10 +64,11 @@
         let advancedDataContainer = document.getElementById("advanced_user_data_container")
         var advancedUserData;
         var userName = getCookie("advancedDataTarget")
-        console.log("userName", userName)
+	var index = userData.map(a=>a.username).indexOf(userName)
+        console.log("userName", typeof(userName))
         console.log("userData", userData)
-        if(userName !== undefined){
-            let firstUser = userData.filter(data=>data.username === userName)[0]
+        if(index !== -1){
+            var firstUser = userData.filter(data=>data.username === userName)[0]
             advancedUserData = createAdvancedUserData( firstUser.beers ,firstUser.cider ,firstUser.snaps );
             const advancedHeader = createHeaderForAdvancedUserData(firstUser.username)   
             var gaugePlot = createGaugePlot();
@@ -76,7 +79,7 @@
         
     }
 
-    const url ="http://localhost:3000/get_data"
+    const url ="http://molnhatt.se/get_data"
     httpGetAsync(url, callback)
 
 </script>

@@ -45,7 +45,10 @@ function createHeaderForAdvancedUserData(username){
 }
 function createAdvancedUserData(nrBeer, nrCider, nrSnaps){
     var div = document.createElement("div")
-
+    div.setAttribute("class", "row")
+    var colDiv = document.createElement("div")
+    colDiv.setAttribute("class", "col")
+    div.appendChild(colDiv)
     var data = [{
         values: [nrBeer, nrCider, nrSnaps],
         labels: ['Öl', 'Cider', 'Snaps'],
@@ -56,13 +59,23 @@ function createAdvancedUserData(nrBeer, nrCider, nrSnaps){
         height: 480,
         width: 320
     };
+    var centerDiv = document.createElement("div")
+    centerDiv.setAttribute("class", "col")
+    div.appendChild(centerDiv)
 
-    Plotly.newPlot(div, data, layout, {displayModeBar:false}  );
+    Plotly.newPlot(centerDiv, data, layout, {displayModeBar:false}  );
+    var colDiv2 = document.createElement("div")
+    colDiv2.setAttribute("class", "col")
+    div.appendChild(colDiv2)
     return div
 }
 function createGaugePlot(){
     var div = document.createElement("div")
-    
+    div.setAttribute("class", "row")
+    var colDiv = document.createElement("div")
+    colDiv.setAttribute("class", "col")
+
+    div.appendChild(colDiv)
     const topScore = 0.0011
     const  worstScore = 0
     const userScore = 0.0005556
@@ -128,7 +141,16 @@ color: '850000'
            showgrid: false, range: [-1, 1]}
     };
 
-    Plotly.newPlot(div, data, layout, {displayModeBar:false});
+    var centerDiv = document.createElement("div")
+    centerDiv.setAttribute("class", "col")
+    div.appendChild(centerDiv)
+
+
+    Plotly.newPlot(centerDiv, data, layout, {displayModeBar:false});
+	
+    var colDiv = document.createElement("div")
+    colDiv.setAttribute("class", "col")
+    div.appendChild(colDiv)
 
     return div;
 }

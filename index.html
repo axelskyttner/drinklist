@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <!-- Bootstrap CSS -->
-    <script src="/jespers_react.js"></script>
-    <link rel="stylesheet" href="/bootstrap">
+    <script src="http://molnhatt.se/jespers_react.js"></script>
+    <link rel="stylesheet" href="http://molnhatt.se/bootstrap">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -172,7 +172,8 @@ function getCookie(cname) {
 
 function init(){
 
-    httpGetAsync("http://molnhatt.se/get_users", frontEndCallback)
+    httpGetAsync("http://localhost:3000/get_users", frontEndCallback)
+//    httpGetAsync("http://molnhatt.se/get_users", frontEndCallback)
 
 }
 

@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="bootstrap">
+    <link rel="stylesheet" href="http://molnhatt.se/bootstrap">
 
     <title>Drinking List!</title>
   </head>
   <body>
-    <script src="jespers_react.js"></script>
+    <script src="http://molnhatt.se/jespers_react.js"></script>
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
  <div class="row">
 <div class="col"></div>
@@ -51,7 +51,9 @@
                 standardDeviation:standardDeviation, 
                 avarageDiff: avarageDiff} 
         })
-            const elementList = userData.map(user=>
+        console.log("all userdata")
+        userData.forEach(console.log)
+        const elementList = userData.map(user=>
                 createUserHtmlElement(user)
             )
         var list = document.getElementById("thelist")
@@ -76,7 +78,7 @@
         
     }
 
-    const url ="http://molnhatt.se/get_data"
+    const url ="http://localhost:3000/get_data"
     httpGetAsync(url, callback)
 
 </script>

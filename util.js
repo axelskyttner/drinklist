@@ -52,19 +52,19 @@ function createHeaderForAdvancedUserData(username){
     header.innerHTML = "Avancerad data för " + username
 	centerCol.appendChild(header)
 	
-	div.appendChild(leftCol)	
+	//div.appendChild(leftCol)	
 	div.appendChild(centerCol)	
-	div.appendChild(rightCol)	
+	//div.appendChild(rightCol)	
 	return div
 
 }
 function createAdvancedUserData(nrBeer, nrCider, nrSnaps){
     var div = document.createElement("div")
-    div.setAttribute("class", "row")
+    //div.setAttribute("class", "row")
 
     var colDiv = document.createElement("div")
     colDiv.setAttribute("class", "col-sm-3")
-    div.appendChild(colDiv)
+    //div.appendChild(colDiv)
 
     var data = [{
         values: [nrBeer, nrCider, nrSnaps],
@@ -73,17 +73,20 @@ function createAdvancedUserData(nrBeer, nrCider, nrSnaps){
     }];
 
     var layout = {
-        height: 480,
-        width: 320
+        height: 600,
+	    //paper_bgcolor:'rgba(1,0,0,0.5)',
+       	title: 'Fördelning av enheter',
+        width: 600,
+
     };
     var centerDiv = document.createElement("div")
     centerDiv.setAttribute("class", "col-sm-6")
-    div.appendChild(centerDiv)
+    //div.appendChild(centerDiv)
 
-    Plotly.newPlot(centerDiv, data, layout, {displayModeBar:false}  );
+    Plotly.newPlot(div, data, layout, {displayModeBar:false}  );
     var colDiv2 = document.createElement("div")
     colDiv2.setAttribute("class", "col-sm-3")
-    div.appendChild(colDiv2)
+    //div.appendChild(colDiv2)
     return div
 }
 
@@ -92,7 +95,7 @@ function createNormalPlot(times){
 
     var colDiv = document.createElement("div")
     colDiv.setAttribute("class", "col")
-    div.appendChild(colDiv)
+    //div.appendChild(colDiv)
 
 	var trace1 = {
 	  x: times.map((a,index)=>index),
@@ -105,20 +108,30 @@ function createNormalPlot(times){
 	  y: [16, 5, 11, 9],
 	  type: 'scatter'
 	};
+	var layout = {
+
+		//paper_bgcolor:'rgba(1,0,0,0.5)',
+height:600, 
+width:600,
+       title: 'Tidsskillnad mellan enheter',
+
+};
 	
 	var data = [trace1];
 	
-	Plotly.newPlot(div, data, {height:400, width:600},{displayModeBar:false, staticPlot:true});
+	Plotly.newPlot(div, data, 
+layout,{displayModeBar:false, staticPlot:true});
 	return div;
 
 }
 function createGaugePlot(userScore, worstScore, topScore){
     var div = document.createElement("div")
-    div.setAttribute("class", "row")
+    //div.setAttribute("class", "row")
+    //div.setAttribute("style", "backgroundColor:grey;")
     var colDiv = document.createElement("div")
     colDiv.setAttribute("class", "col")
 
-    div.appendChild(colDiv)
+    //div.appendChild(colDiv)
     // Enter a speed between 0 and 180
     var level = (userScore-worstScore)/(topScore - worstScore)*180;
 
@@ -147,8 +160,8 @@ function createGaugePlot(userScore, worstScore, topScore){
         hoverinfo: 'text+name'},
         { values: [total/6, total/6, total/6, total/6, total/6, total/6, total],
           rotation: 90,
-          text: ['Kanonkul!', 'Helt okej kul', 'Heh', 'Ska träffa föräldrar',
-          'Ska träffa svärföräldrar', 'Ska träffa barnen', ''],
+          text: ['Tar det lugnt', 'Trevligt', 'Heh', 'Tjohoo',
+          'Skoj!', 'Partygänget!', ''],
           textinfo: 'text',
           textposition:'inside',
           marker: {colors:['rgba(14, 127, 0, .5)', 'rgba(110, 154, 22, .5)',
@@ -172,9 +185,10 @@ shapes:[{
 color: '850000'
       }
        }],
-       title: 'Enhetsfrekvens 0-0.016Hz',
-       height: 680,
-       width: 360,
+	   //paper_bgcolor:'rgba(1,0,0,0.5)',
+       title: 'Relativ Diskanalys baserad på enheter',
+       height: 600,
+       width: 600,
        xaxis: {zeroline:false, showticklabels:false,
            showgrid: false, range: [-1, 1]},
        yaxis: {zeroline:false, showticklabels:false,
@@ -183,17 +197,17 @@ color: '850000'
 
     var centerDiv = document.createElement("div")
     centerDiv.setAttribute("class", "col")
-    div.appendChild(centerDiv)
+    //div.appendChild(centerDiv)
 
 
-    Plotly.newPlot(centerDiv, data, layout, {
+    Plotly.newPlot(div, data, layout, {
 	displayModeBar:false,
 	staticPlot:true
 });
 	
     var colDiv = document.createElement("div")
     colDiv.setAttribute("class", "col")
-    div.appendChild(colDiv)
+    //div.appendChild(colDiv)
 
     return div;
 }

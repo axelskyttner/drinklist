@@ -71,7 +71,7 @@
             var firstUser = userData.filter(data=>data.username === userName)[0]
             advancedUserData = createAdvancedUserData( firstUser.beers ,firstUser.cider ,firstUser.snaps );
             const advancedHeader = createHeaderForAdvancedUserData(firstUser.username)   
-            var gaugePlot = createGaugePlot();
+            var gaugePlot = createGaugePlot(1/firstUser.avarageDiff);
             advanced_user_data_container.appendChild(advancedHeader)
             advanced_user_data_container.appendChild(advancedUserData)
             advanced_user_data_container.appendChild(gaugePlot)

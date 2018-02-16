@@ -37,18 +37,35 @@ function truncate(val){
     return Math.round(val*100)/100
 }
 function createHeaderForAdvancedUserData(username){
-    var header = document.createElement("h2")
-    header.innerHTML = "Avancerad data för " + username
+	var div = document.createElement("div")
+	div.setAttribute("class", "row")
+	var leftCol = document.createElement("div")
+	leftCol.setAttribute("class", "col-sm-3")	
 
-    return header
+
+	var rightCol = document.createElement("div")
+	rightCol.setAttribute("class", "col-sm-3")	
+
+	var centerCol = document.createElement("div")
+	centerCol.setAttribute("class", "col-sm-6")	
+   	var header = document.createElement("h2")
+    header.innerHTML = "Avancerad data för " + username
+	centerCol.appendChild(header)
+	
+	div.appendChild(leftCol)	
+	div.appendChild(centerCol)	
+	div.appendChild(rightCol)	
+	return div
 
 }
 function createAdvancedUserData(nrBeer, nrCider, nrSnaps){
     var div = document.createElement("div")
     div.setAttribute("class", "row")
+
     var colDiv = document.createElement("div")
-    colDiv.setAttribute("class", "col")
+    colDiv.setAttribute("class", "col-sm-3")
     div.appendChild(colDiv)
+
     var data = [{
         values: [nrBeer, nrCider, nrSnaps],
         labels: ['Öl', 'Cider', 'Snaps'],
@@ -60,25 +77,24 @@ function createAdvancedUserData(nrBeer, nrCider, nrSnaps){
         width: 320
     };
     var centerDiv = document.createElement("div")
-    centerDiv.setAttribute("class", "col")
+    centerDiv.setAttribute("class", "col-sm-6")
     div.appendChild(centerDiv)
 
     Plotly.newPlot(centerDiv, data, layout, {displayModeBar:false}  );
     var colDiv2 = document.createElement("div")
-    colDiv2.setAttribute("class", "col")
+    colDiv2.setAttribute("class", "col-sm-3")
     div.appendChild(colDiv2)
     return div
 }
-function createGaugePlot(){
+function createGaugePlot(userScore){
     var div = document.createElement("div")
     div.setAttribute("class", "row")
     var colDiv = document.createElement("div")
     colDiv.setAttribute("class", "col")
 
     div.appendChild(colDiv)
-    const topScore = 0.0011
+    const topScore = 1
     const  worstScore = 0
-    const userScore = 0.0005556
     // Enter a speed between 0 and 180
     var level = userScore/(topScore)*180;
 
@@ -133,8 +149,8 @@ color: '850000'
       }
        }],
        title: 'Enhetsfrekvens 0-0.016Hz',
-       height: 320,
-       width: 280,
+       height: 680,
+       width: 360,
        xaxis: {zeroline:false, showticklabels:false,
            showgrid: false, range: [-1, 1]},
        yaxis: {zeroline:false, showticklabels:false,
@@ -146,7 +162,10 @@ color: '850000'
     div.appendChild(centerDiv)
 
 
-    Plotly.newPlot(centerDiv, data, layout, {displayModeBar:false});
+    Plotly.newPlot(centerDiv, data, layout, {
+	displayModeBar:false,
+	staticPlot:true
+});
 	
     var colDiv = document.createElement("div")
     colDiv.setAttribute("class", "col")

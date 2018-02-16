@@ -4,15 +4,17 @@ const fs = require("fs")
 var url = require('url');
 let data = require("./data.json")
 let users = require("./users.json")
-
+const beverages = ["beer", "cider", "snaps"]
 append_data = (name, beverage, hour, minute)=>{
         data.history.push({name:name, unit:beverage, time:hour.toString() + ":" + minute.toString()})
 }
+	
 
 update_data = (username, beverage, hour, minute)=>{
     fileName = "data.json"
     console.log("users", users.users) 
-    if(users.users.indexOf(username) !== -1){
+		
+    if(users.users.indexOf(username) !== -1 && beverages.indexOf(beverage) !== -1){
 
     	append_data(username, beverage, hour,minute)
         fs.writeFile(fileName, JSON.stringify(data), function (err) {
@@ -75,7 +77,7 @@ app.get('/update_list', function (req, res) {
     beverage = req.query.beverage 
     console.log("beverage", beverage)
      
-        update_data(username, beverage,new Date().getHours() + 1, new Date().getMinutes() )
+        update_data(username, beverage,new Date().getHours() + 1, new Date().getMinutes()+4 )
     res.sendFile(__dirname +"/index.html")
 })
 

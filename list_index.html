@@ -37,7 +37,8 @@
             console.log(lastTime)
             const times = transactions.map(trans=>parseTime(trans.time))
             console.log("times",times)
-            const avarageDiff = calculateMeanDifference(times)
+            const timeDiffs = calculateMeanDifference(times)
+            const avarageDiff = truncate(avarage(timeDiffs))
             const standardDeviation = calculateStandardDeviation(times)
             const  beer_transactions=  transactions.filter(a=>a.unit === "beer")
             const  cider_transactions= transactions.filter(a=>a.unit === "cider")
@@ -49,10 +50,12 @@
                 cider: cider_transactions.length,
                 snaps: snaps_transactions.length,
                 time:lastTime, 
+                allTimes:timeDiffs, 
                 username:username, 
                 standardDeviation:standardDeviation, 
                 avarageDiff: avarageDiff} 
         })
+
         console.log("all userdata")
         userData.forEach(console.log)
         const elementList = userData.map(user=>
@@ -68,11 +71,15 @@
         console.log("userName", typeof(userName))
         console.log("userData", userData)
         if(index !== -1){
+			const lowestScore = Math.min.apply(Math, userData.map(a=>a.avarageDiff))
+			const highestScore = Math.max.apply(Math, userData.map(a=>a.avarageDiff))
             var firstUser = userData.filter(data=>data.username === userName)[0]
             advancedUserData = createAdvancedUserData( firstUser.beers ,firstUser.cider ,firstUser.snaps );
             const advancedHeader = createHeaderForAdvancedUserData(firstUser.username)   
-            var gaugePlot = createGaugePlot(1/firstUser.avarageDiff);
+            const normalPlot = createNormalPlot(firstUser.allTimes)   
+            var gaugePlot = createGaugePlot(firstUser.avarageDiff, lowestScore, highestScore)
             advanced_user_data_container.appendChild(advancedHeader)
+            advanced_user_data_container.appendChild(normalPlot)
             advanced_user_data_container.appendChild(advancedUserData)
             advanced_user_data_container.appendChild(gaugePlot)
         }

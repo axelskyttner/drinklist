@@ -86,17 +86,41 @@ function createAdvancedUserData(nrBeer, nrCider, nrSnaps){
     div.appendChild(colDiv2)
     return div
 }
-function createGaugePlot(userScore){
+
+function createNormalPlot(times){
+	var div = document.createElement("div")
+
+    var colDiv = document.createElement("div")
+    colDiv.setAttribute("class", "col")
+    div.appendChild(colDiv)
+
+	var trace1 = {
+	  x: times.map((a,index)=>index),
+	  y: times,
+	  type: 'scatter'
+	};
+	
+	var trace2 = {
+	  x: [1, 2, 3, 4],
+	  y: [16, 5, 11, 9],
+	  type: 'scatter'
+	};
+	
+	var data = [trace1];
+	
+	Plotly.newPlot(div, data, {height:400, width:600},{displayModeBar:false, staticPlot:true});
+	return div;
+
+}
+function createGaugePlot(userScore, worstScore, topScore){
     var div = document.createElement("div")
     div.setAttribute("class", "row")
     var colDiv = document.createElement("div")
     colDiv.setAttribute("class", "col")
 
     div.appendChild(colDiv)
-    const topScore = 1
-    const  worstScore = 0
     // Enter a speed between 0 and 180
-    var level = userScore/(topScore)*180;
+    var level = (userScore-worstScore)/(topScore - worstScore)*180;
 
     // Trig to calc meter point
     var degrees = 180 - level,
@@ -240,14 +264,14 @@ function average(data){
 }
 function calculateMeanDifference(list){
     if(list.length <= 1){
-        return 0
+        return [0]
     }
     else {
 
         const startOfList = list.slice(0,-1) 
         const endOfList = list.slice(1) 
         const differences = startOfList.map((val,index)=>Math.abs(val-endOfList[index]) )
-        return truncate(avarage(differences))
+        return differences
     }
 }
 

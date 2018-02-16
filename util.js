@@ -261,8 +261,11 @@ function calculateStandardDeviation(values){
     var sqrDiff = diff * diff;
     return sqrDiff;
   });
-  
-  var avgSquareDiff = average(squareDiffs);
+   console.log("avg",avg) 
+   console.log("squareDiffs",squareDiffs) 
+
+  const sum = squareDiffs.reduce((acc,val)=>val + acc, 0);
+  const avgSquareDiff = 1/(squareDiffs.length -1) *sum;
 
   var stdDev = Math.sqrt(avgSquareDiff);
   return truncate(stdDev);
@@ -313,6 +316,8 @@ function getCookie(cname) {
 module.exports ={
 
     calculateMeanDifference: calculateMeanDifference,
+    calculateStandardDeviation: calculateStandardDeviation,
+    avarage: avarage,
     parseTime: parseTime
 }
 */

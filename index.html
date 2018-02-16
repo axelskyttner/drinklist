@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
     <!-- Bootstrap CSS -->
-    <script src="http://molnhatt.se/jespers_react.js"></script>
-    <link rel="stylesheet" href="http://molnhatt.se/bootstrap">
+    <script src="http://localhost:3333/jespers_react.js"></script>
+    <link rel="stylesheet" href="http://localhost:3333/bootstrap">
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -57,7 +57,8 @@ you're gonna be the one that saves me</title>
 
 <div class="row">
 <div class="col"></div>
-<h1 style = "color:black">Strecklista</h1> 
+<img src="https://media.giphy.com/media/9G6N22hitwrVj5eRiC/giphy.gif"></img>
+<!--<h1 style = "color:black">Strecklista</h1> -->
 <div class="col"></div>
 </div>
 
@@ -153,10 +154,10 @@ function createRadioButton(user){
 
 
 function init(){
-    history.pushState({},"", "http://molnhatt.se/")
+    history.pushState({},"", "http://localhost:3333/")
     //window.location.href = ""
     //httpGetAsync("http://localhost:3000/get_users", frontEndCallback)
-    httpGetAsync("http://molnhatt.se/get_users", frontEndCallback)
+    httpGetAsync("http://localhost:3333/get_users", frontEndCallback)
 
 }
 

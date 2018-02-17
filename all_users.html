@@ -26,7 +26,30 @@
 <script>
 
 
+function createBarPlot(data, div){
 
+    const transaction_history = JSON.parse(data).history 
+        const users = Array.from(new Set(transaction_history.map(a=>a.name)))
+        console.log("users", users)
+
+        var userData = users.map((username)=>getUserData(username, transaction_history))
+        var userNames = userData.map(userData=>userData.username)
+        var userValues = userData.map(userData=>userData.units)
+        console.log("userValues", userValues)
+        console.log("username", userValues)
+        var data = [
+        {
+    x:userNames,
+    y:userValues,
+   type: 'bar'
+        }
+        ];
+
+        Plotly.newPlot(div, data,{}, {
+            displayModeBar:false, staticPlot:true
+});
+
+}
 
 const callback = (json_data)=>{
     const transaction_history = JSON.parse(json_data).history 
@@ -35,7 +58,7 @@ const callback = (json_data)=>{
 
         var userData = users.map((username)=>getUserData(username, transaction_history))
 
-    console.log("all userdata")
+        console.log("all userdata")
         userData.forEach(console.log)
         const elementList = userData.map(user=>
                 createUserHtmlElement(user)
@@ -66,8 +89,8 @@ const callback = (json_data)=>{
 }
 
 const url ="http://localhost:3333/get_data"
-httpGetAsync(url, callback)
+httpGetAsync(url, (data)=>createBarPlot(data, document.getElementById("advanced_user_data_container")))
 
-    </script>
-    </body>
-    </html>
+</script>
+</body>
+</html>

@@ -11,12 +11,12 @@ function httpGetAsync(theUrl, callback)
 }
 function createUserHtmlElement(userData){
     var li = document.createElement("li")
-    var button = document.createElement("button")
-    
-    a = ()=>{   
-        set_cookie("advancedDataTarget", userData.username);
-         location.reload()
-}
+        var button = document.createElement("button")
+
+        a = ()=>{   
+            set_cookie("advancedDataTarget", userData.username);
+            location.reload()
+        }
 
     li.addEventListener("click", a)
         li.setAttribute("class", "list-group-item justify-content=between")
@@ -25,10 +25,10 @@ function createUserHtmlElement(userData){
         ' <span class="badge badge-default badge-pill">' + 
         userData.units + 
         '</span>' +
-             ', väntevärde:' + userData.avarageDiff + ', Standardavvikelse: ' + userData.standardDeviation + ', senaste streck: '+ userData.time
-        
-    //li.appendChild(button)
-    return li;
+        ', väntevärde:' + userData.avarageDiff + ', Standardavvikelse: ' + userData.standardDeviation + ', senaste streck: '+ userData.time
+
+        //li.appendChild(button)
+        return li;
 
 }
 
@@ -37,103 +37,103 @@ function truncate(val){
     return Math.round(val*100)/100
 }
 function createHeaderForAdvancedUserData(username){
-	var div = document.createElement("div")
-	div.setAttribute("class", "row")
-	var leftCol = document.createElement("div")
-	leftCol.setAttribute("class", "col-sm-3")	
+    var div = document.createElement("div")
+        div.setAttribute("class", "row")
+        var leftCol = document.createElement("div")
+        leftCol.setAttribute("class", "col-sm-3")	
 
 
-	var rightCol = document.createElement("div")
-	rightCol.setAttribute("class", "col-sm-3")	
+        var rightCol = document.createElement("div")
+        rightCol.setAttribute("class", "col-sm-3")	
 
-	var centerCol = document.createElement("div")
-	centerCol.setAttribute("class", "col-sm-6")	
-   	var header = document.createElement("h2")
-    header.innerHTML = "Avancerad data för " + username
-	centerCol.appendChild(header)
-	
-	//div.appendChild(leftCol)	
-	div.appendChild(centerCol)	
-	//div.appendChild(rightCol)	
-	return div
+        var centerCol = document.createElement("div")
+        centerCol.setAttribute("class", "col-sm-6")	
+        var header = document.createElement("h2")
+        header.innerHTML = "Avancerad data för " + username
+        centerCol.appendChild(header)
+
+        //div.appendChild(leftCol)	
+        div.appendChild(centerCol)	
+        //div.appendChild(rightCol)	
+        return div
 
 }
 function createAdvancedUserData(nrBeer, nrCider, nrSnaps){
     var div = document.createElement("div")
-    //div.setAttribute("class", "row")
+        //div.setAttribute("class", "row")
 
-    var colDiv = document.createElement("div")
-    colDiv.setAttribute("class", "col-sm-3")
-    //div.appendChild(colDiv)
+        var colDiv = document.createElement("div")
+        colDiv.setAttribute("class", "col-sm-3")
+        //div.appendChild(colDiv)
 
-    var data = [{
-        values: [nrBeer, nrCider, nrSnaps],
+        var data = [{
+values: [nrBeer, nrCider, nrSnaps],
         labels: ['Öl', 'Cider', 'Snaps'],
         type: 'pie'
-    }];
+        }];
 
     var layout = {
-        height: 600,
-	    //paper_bgcolor:'rgba(1,0,0,0.5)',
-       	title: 'Fördelning av enheter',
+height: 600,
+        //paper_bgcolor:'rgba(1,0,0,0.5)',
+        title: 'Fördelning av enheter',
         width: 600,
 
     };
     var centerDiv = document.createElement("div")
-    centerDiv.setAttribute("class", "col-sm-6")
-    //div.appendChild(centerDiv)
+        centerDiv.setAttribute("class", "col-sm-6")
+        //div.appendChild(centerDiv)
 
-    Plotly.newPlot(div, data, layout, {displayModeBar:false}  );
+        Plotly.newPlot(div, data, layout, {displayModeBar:false}  );
     var colDiv2 = document.createElement("div")
-    colDiv2.setAttribute("class", "col-sm-3")
-    //div.appendChild(colDiv2)
-    return div
+        colDiv2.setAttribute("class", "col-sm-3")
+        //div.appendChild(colDiv2)
+        return div
 }
 
 function createNormalPlot(times){
-	var div = document.createElement("div")
+    var div = document.createElement("div")
 
-    var colDiv = document.createElement("div")
-    colDiv.setAttribute("class", "col")
-    //div.appendChild(colDiv)
+        var colDiv = document.createElement("div")
+        colDiv.setAttribute("class", "col")
+        //div.appendChild(colDiv)
 
-	var trace1 = {
-	  x: times.map((a,index)=>index),
-	  y: times,
-	  type: 'scatter'
-	};
-	
-	var trace2 = {
-	  x: [1, 2, 3, 4],
-	  y: [16, 5, 11, 9],
-	  type: 'scatter'
-	};
-	var layout = {
+        var trace1 = {
+x: times.map((a,index)=>index),
+   y: times,
+   type: 'scatter'
+        };
 
-		//paper_bgcolor:'rgba(1,0,0,0.5)',
+    var trace2 = {
+x: [1, 2, 3, 4],
+   y: [16, 5, 11, 9],
+   type: 'scatter'
+    };
+    var layout = {
+
+        //paper_bgcolor:'rgba(1,0,0,0.5)',
 height:600, 
-width:600,
+       width:600,
        title: 'Tidsskillnad mellan enheter',
 
-};
-	
-	var data = [trace1];
-	
-	Plotly.newPlot(div, data, 
-layout,{displayModeBar:false, staticPlot:true});
-	return div;
+    };
+
+    var data = [trace1];
+
+    Plotly.newPlot(div, data, 
+            layout,{displayModeBar:false, staticPlot:true});
+    return div;
 
 }
 function createGaugePlot(userScore, worstScore, topScore){
     var div = document.createElement("div")
-    //div.setAttribute("class", "row")
-    //div.setAttribute("style", "backgroundColor:grey;")
-    var colDiv = document.createElement("div")
-    colDiv.setAttribute("class", "col")
+        //div.setAttribute("class", "row")
+        //div.setAttribute("style", "backgroundColor:grey;")
+        var colDiv = document.createElement("div")
+        colDiv.setAttribute("class", "col")
 
-    //div.appendChild(colDiv)
-    // Enter a speed between 0 and 180
-    var level = (userScore-worstScore)/(topScore - worstScore)*180;
+        //div.appendChild(colDiv)
+        // Enter a speed between 0 and 180
+        var level = (userScore-worstScore)/(topScore - worstScore)*180;
 
     // Trig to calc meter point
     var degrees = 180 - level,
@@ -149,17 +149,17 @@ function createGaugePlot(userScore, worstScore, topScore){
         pathY = String(y),
         pathEnd = ' Z';
     var path = mainPath.concat(pathX,space,pathY,pathEnd);
-    
+
     const total = 4
-    var data = [{ type: 'scatter',
-        x: [0], y:[0],
-        marker: {size: 28, color:'850000'},
-        showlegend: false,
-        name: 'speed',
-        text: level,
-        hoverinfo: 'text+name'},
-        { values: [total/6, total/6, total/6, total/6, total/6, total/6, total],
-          rotation: 90,
+        var data = [{ type: 'scatter',
+            x: [0], y:[0],
+            marker: {size: 28, color:'850000'},
+            showlegend: false,
+            name: 'speed',
+            text: level,
+            hoverinfo: 'text+name'},
+    { values: [total/6, total/6, total/6, total/6, total/6, total/6, total],
+rotation: 90,
           text: ['Tar det lugnt', 'Trevligt', 'Heh', 'Tjohoo',
           'Skoj!', 'Partygänget!', ''],
           textinfo: 'text',
@@ -173,20 +173,20 @@ function createGaugePlot(userScore, worstScore, topScore){
           hole: .5,
           type: 'pie',
           showlegend: false
-        }];
+    }];
 
 
     var layout = {
 shapes:[{
-      type: 'path',
+type: 'path',
       path: path,
       fillcolor: '850000',
       line: {
 color: '850000'
       }
        }],
-	   //paper_bgcolor:'rgba(1,0,0,0.5)',
-       title: 'Relativ Diskanalys baserad på enheter',
+       //paper_bgcolor:'rgba(1,0,0,0.5)',
+title: 'Relativ Diskanalys baserad på enheter',
        height: 600,
        width: 600,
        xaxis: {zeroline:false, showticklabels:false,
@@ -196,28 +196,22 @@ color: '850000'
     };
 
     var centerDiv = document.createElement("div")
-    centerDiv.setAttribute("class", "col")
-    //div.appendChild(centerDiv)
+        centerDiv.setAttribute("class", "col")
+        //div.appendChild(centerDiv)
 
 
-    Plotly.newPlot(div, data, layout, {
-	displayModeBar:false,
-	staticPlot:true
+        Plotly.newPlot(div, data, layout, {
+displayModeBar:false,
+staticPlot:true
 });
-	
-    var colDiv = document.createElement("div")
-    colDiv.setAttribute("class", "col")
-    //div.appendChild(colDiv)
 
-    return div;
+var colDiv = document.createElement("div")
+colDiv.setAttribute("class", "col")
+//div.appendChild(colDiv)
+
+return div;
 }
 
-function create_listis(name, value){
-    var li = document.createElement("li")
-        li.setAttribute("class", "list-group-item justify-content=between")
-        li.innerHTML = name;
-    return li;
-}
 
 function update_list(list_of_names, corresponding_values){
     const elements = list_of_names.map(function(name, index){
@@ -243,41 +237,69 @@ function compose () {
 
 function parseTime(timeString){
     var times = timeString.split(":")
-    var hours = parseInt(times[0])
-    var minutes = parseInt(times[1])
-    return hours*60 + minutes
+        var hours = parseInt(times[0])
+        var minutes = parseInt(times[1])
+        return hours*60 + minutes
 }
 function avarage(list){
     return list.reduce((avg, val, index, arr)=>avg+val/arr.length,0)
 
 }
 
+function getUserData(username, transaction_history){
+
+                const transactions = transaction_history
+                .filter(data=>data.name == username)
+                const lastTime = transactions.slice(-1)[0].time
+                const times = transactions.map(trans=>parseTime(trans.time))
+                const timeDiffs = calculateMeanDifference(times)
+                const avarageDiff = truncate(avarage(timeDiffs))
+                const standardDeviation = calculateStandardDeviation(times)
+                const  beer_transactions=  transactions.filter(a=>a.unit === "beer")
+                const  cider_transactions= transactions.filter(a=>a.unit === "cider")
+                const  snaps_transactions= transactions.filter(a=>a.unit === "snaps")
+
+                return {
+                        units: transactions.length,
+                        beers: beer_transactions.length,
+                        cider: cider_transactions.length,
+                        snaps: snaps_transactions.length,
+                        time:lastTime, 
+                        allTimes:timeDiffs, 
+                        username:username, 
+                        standardDeviation:standardDeviation, 
+                        avarageDiff: avarageDiff} 
+
+}
 
 function calculateStandardDeviation(values){
-  var avg = average(values);
-  
-  var squareDiffs = values.map(function(value){
-    var diff = value - avg;
-    var sqrDiff = diff * diff;
-    return sqrDiff;
-  });
-   console.log("avg",avg) 
-   console.log("squareDiffs",squareDiffs) 
+    if(values.length < 2){
+        return 0
+    }
+    var avg = average(values);
 
-  const sum = squareDiffs.reduce((acc,val)=>val + acc, 0);
-  const avgSquareDiff = 1/(squareDiffs.length -1) *sum;
+    var squareDiffs = values.map(function(value){
+            var diff = value - avg;
+            var sqrDiff = diff * diff;
+            return sqrDiff;
+            });
+    console.log("avg",avg) 
+        console.log("squareDiffs",squareDiffs) 
 
-  var stdDev = Math.sqrt(avgSquareDiff);
-  return truncate(stdDev);
+        const sum = squareDiffs.reduce((acc,val)=>val + acc, 0);
+    const avgSquareDiff = 1/(squareDiffs.length -1) *sum;
+
+    var stdDev = Math.sqrt(avgSquareDiff);
+    return truncate(stdDev);
 }
 
 function average(data){
-  var sum = data.reduce(function(sum, value){
-    return sum + value;
-  }, 0);
+    var sum = data.reduce(function(sum, value){
+            return sum + value;
+            }, 0);
 
-  var avg = sum / data.length;
-  return avg;
+    var avg = sum / data.length;
+    return avg;
 }
 function calculateMeanDifference(list){
     if(list.length <= 1){
@@ -286,9 +308,9 @@ function calculateMeanDifference(list){
     else {
 
         const startOfList = list.slice(0,-1) 
-        const endOfList = list.slice(1) 
-        const differences = startOfList.map((val,index)=>Math.abs(val-endOfList[index]) )
-        return differences
+            const endOfList = list.slice(1) 
+            const differences = startOfList.map((val,index)=>Math.abs(val-endOfList[index]) )
+            return differences
     }
 }
 
@@ -313,11 +335,11 @@ function getCookie(cname) {
     return "";
 }
 /*
-module.exports ={
+   module.exports ={
 
-    calculateMeanDifference: calculateMeanDifference,
-    calculateStandardDeviation: calculateStandardDeviation,
-    avarage: avarage,
-    parseTime: parseTime
+calculateMeanDifference: calculateMeanDifference,
+calculateStandardDeviation: calculateStandardDeviation,
+avarage: avarage,
+parseTime: parseTime
 }
-*/
+ */

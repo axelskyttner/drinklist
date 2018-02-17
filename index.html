@@ -122,17 +122,28 @@ var frontEndCallback =(users_json)=>{
     var activeUser = getCookie("active")
     radio_button = createRadioButton(activeUser)
     active_user_list.appendChild(radio_button)
+
+    //last we make new request for data
+    const url ="http://localhost:3333/get_data"
+    httpGetAsync(url, updatePlayerScore)
 }
 
+
+
 function createUserButtons( users){
-    var user_elements = users.map(create_listis)
-    user_elements.forEach((el)=>{
-        el.addEventListener("click", (e)=>{
-           set_cookie("active", el.innerHTML) 
-           location.assign("")
-           //location.reload()
-        })
+    var user_elements = users.map(user=>{
+    el = document.createElement("li");
+    el.setAttribute("class", "list-group-item justify-content-between");
+    el.setAttribute("id", user)
+    el.innerHTML += user;
+    el.addEventListener("click", (e)=>{
+       set_cookie("active", user) 
+       location.assign("")
+       //location.reload()
     })
+    return el;
+
+})
     return user_elements;
 
 }
@@ -152,12 +163,28 @@ function createRadioButton(user){
     return li;
 }
 
+function updatePlayerScore(data){
+    const transaction_history = JSON.parse(data).history;
+    const users = Array.from(new Set(transaction_history.map(a=>a.name)))
+    const userData = users.map(user=>getUserData(user, transaction_history))
+    userData.forEach(userData=>{
+
+        const div = document.getElementById(userData.username)
+        if( div !== null){
+            console.log("userData", userData)
+            div.innerHTML += ", enheter:" +  String(userData.units)
+        }
+})
+    console.log("data", userData)
+}
+
 
 function init(){
     history.pushState({},"", "http://localhost:3333/")
     //window.location.href = ""
     //httpGetAsync("http://localhost:3000/get_users", frontEndCallback)
     httpGetAsync("http://localhost:3333/get_users", frontEndCallback)
+
 
 }
 

@@ -58,12 +58,14 @@ app.get("/jespers_react.js", (req,res)=>{
     console.log("request incoming to jespers_react")
     res.sendFile(__dirname + "/util.js")
 
-
 }) 
 app.get('/search', function (req, res) { //res.json(data);
   res.sendFile(__dirname + "/list_index.html")
 })
 
+app.get('/avnsp', function (req, res) { //res.json(data);
+  res.sendFile(__dirname + "/all_users.html")
+})
 app.get('/get_data', function (req, res) {
   res.json(data);
 })
@@ -77,7 +79,7 @@ app.get('/update_list', function (req, res) {
     beverage = req.query.beverage 
     console.log("beverage", beverage)
      
-        update_data(username, beverage,new Date().getHours() + 1, new Date().getMinutes()+4 )
+        update_data(username, beverage,new Date().getMinutes() + 4, new Date().getSeconds()+4 )
     res.sendFile(__dirname +"/index.html")
 })
 
